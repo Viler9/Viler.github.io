@@ -6,12 +6,12 @@
 }
 
 :root {
-    --primary: #4f46e5;
-    --primary-hover: #4338ca;
-    --dark: #1e1b4b;
-    --darker: #0f0d23;
+    --primary: #1a1a1a;
+    --primary-hover: #333333;
+    --dark: #1a1a1a;
+    --darker: #0d0d0d;
     --light: #f8fafc;
-    --gray: #94a3b8;
+    --gray: #888888;
     --card-bg: #ffffff;
     --transition: 0.3s ease;
 }
@@ -40,7 +40,7 @@ body {
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(15, 13, 35, 0.92);
+    background: rgba(13, 13, 13, 0.95);
     backdrop-filter: blur(12px);
     padding: 16px 0;
 }
@@ -89,12 +89,12 @@ body {
 
 /* 英雄区 */
 .hero {
-    min-height: 100vh;
+    min-height: 70vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, var(--darker) 0%, #1e1b4b 50%, #312e81 100%);
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #2d2d2d 100%);
     color: #fff;
-    padding-top: 80px;
+    padding-top: 60px;
 }
 
 .hero-content {
@@ -103,31 +103,31 @@ body {
 
 .greeting {
     font-size: 1.1rem;
-    color: #a5b4fc;
-    margin-bottom: 8px;
+    color: #999;
+    margin-bottom: 4px;
 }
 
 .hero h1 {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: 800;
-    margin-bottom: 12px;
+    margin-bottom: 6px;
     letter-spacing: -1px;
-    background: linear-gradient(135deg, #fff, #a5b4fc);
+    background: linear-gradient(135deg, #fff, #999);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .subtitle {
-    font-size: 1.4rem;
-    color: #c7d2fe;
-    margin-bottom: 16px;
+    font-size: 1.1rem;
+    color: #bbb;
+    margin-bottom: 8px;
 }
 
 .description {
     color: #94a3b8;
     font-size: 1.05rem;
-    margin-bottom: 36px;
+    margin-bottom: 20px;
 }
 
 .hero-buttons {
@@ -148,14 +148,14 @@ body {
 }
 
 .btn-primary {
-    background: var(--primary);
+    background: #1a1a1a;
     color: #fff;
 }
 
 .btn-primary:hover {
     background: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
 
 .btn-outline {
@@ -170,11 +170,11 @@ body {
 
 /* 通用区块 */
 .section {
-    padding: 100px 0;
+    padding: 50px 0;
 }
 
 .section-dark {
-    background: #0f0d23;
+    background: #1a1a1a;
     color: #e2e8f0;
 }
 
@@ -186,9 +186,9 @@ body {
     font-size: 2.2rem;
     font-weight: 700;
     text-align: center;
-    margin-bottom: 56px;
+    margin-bottom: 30px;
     position: relative;
-    color: var(--dark);
+    color: #1a1a1a;
 }
 
 .section-title::after {
@@ -196,8 +196,8 @@ body {
     display: block;
     width: 48px;
     height: 4px;
-    background: var(--primary);
-    margin: 16px auto 0;
+    background: #1a1a1a;
+    margin: 10px auto 0;
     border-radius: 2px;
 }
 
@@ -205,12 +205,12 @@ body {
 .about-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 48px;
+    gap: 24px;
     align-items: center;
 }
 
 .about-text p {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     font-size: 1.05rem;
 }
 
@@ -259,17 +259,17 @@ body {
 .skill-card:hover {
     transform: translateY(-6px);
     background: rgba(255, 255, 255, 0.1);
-    border-color: var(--primary);
+    border-color: #666;
 }
 
 .skill-icon {
     font-size: 2.5rem;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .skill-card h3 {
     font-size: 1.15rem;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     color: #fff;
 }
 
@@ -311,14 +311,14 @@ body {
 
 .project-info h3 {
     font-size: 1.2rem;
-    margin-bottom: 8px;
-    color: var(--dark);
+    margin-bottom: 4px;
+    color: #1a1a1a;
 }
 
 .project-info p {
     color: #64748b;
     font-size: 0.95rem;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .project-tags {
@@ -328,7 +328,7 @@ body {
 }
 
 .project-tags span {
-    background: #f1f5f9;
+    background: #f2f2f2;
     color: #475569;
     padding: 4px 12px;
     border-radius: 20px;
@@ -367,15 +367,15 @@ body {
 }
 
 .contact-item:hover {
-    background: var(--primary);
-    border-color: var(--primary);
+    background: #1a1a1a;
+    border-color: #666;
     color: #fff;
     transform: translateY(-3px);
 }
 
 /* 页脚 */
 .footer {
-    background: var(--darker);
+    background: #0d0d0d;
     color: #64748b;
     text-align: center;
     padding: 32px 0;
@@ -391,7 +391,7 @@ body {
         left: 0;
         right: 0;
         flex-direction: column;
-        background: rgba(15, 13, 35, 0.98);
+        background: rgba(13, 13, 13, 0.98);
         padding: 20px 24px;
         gap: 16px;
     }
