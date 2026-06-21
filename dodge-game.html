@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>躲避方块</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Microsoft YaHei', sans-serif;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .container { text-align: center; }
+        h2 { color: #e94560; margin-bottom: 10px; font-size: 22px; }
+        .score-board { color: #fff; margin-bottom: 8px; font-size: 16px; }
+        .score-board span { color: #e94560; font-weight: bold; font-size: 20px; }
+        canvas {
+            background: #16213e;
+            border: 2px solid #0f3460;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+        .tip { color: #888; margin-top: 10px; font-size: 13px; }
+        .game-over-overlay {
+            display: none;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.85);
+            color: #fff;
+            padding: 30px 50px;
+            border-radius: 12px;
+            text-align: center;
+            z-index: 10;
+        }
+        .game-over-overlay h3 { color: #e94560; font-size: 28px; margin-bottom: 10px; }
+        .game-over-overlay p { margin-bottom: 15px; font-size: 16px; }
+        .game-over-overlay button {
+            background: #e94560;
+            color: #fff;
+            border: none;
+            padding: 10px 30px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .game-over-overlay button:hover { background: #c73650; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>躲避方块</h2>
+        <div class="score-board">得分：<span id="score">0</span></div>
+        <canvas id="game" width="360" height="600"></canvas>
+        <p class="tip">← → 或 A D 移动 | 空格开始</p>
+    </div>
+    <div class="game-over-overlay" id="overlay">
+        <h3>游戏结束</h3>
+        <p>最终得分：<span id="finalScore">0</span></p>
+        <button onclick="restart()">再来一局</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('score');
+        const overlay = document.getElementById('overlay');
+        const finalScoreEl = document.getElementById('finalScore');
+
+        const W = canvas.width, H = canvas.height;
+
+        // 玩家
+        const player = { w: 40, h: 40, x: W / 2 - 20, y: H - 60, speed: 6 };
+
+        // 障碍物
+        let obstacles = [];
+        let score = 0;
+        let gameRunning = false;
+        let gameOver = false;
+        let frame = 0;
+        let spawnRate = 45; // 每隔多少帧生成一个
+        let fallSpeed = 3;
+
+        // 键盘状态
+        const keys = {};
+        document.addEventListener('keydown', e => {
+            keys[e.key] = true;
+            if (e.key === ' ') {
+                e.preventDefault();
+                if (!gameRunning && !gameOver) startGame();
+                else if (gameOver) restart();
+            }
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') e.preventDefault();
+        });
+        document.addEventListener('keyup', e => { keys[e.key] = false; });
+
+        // 移动端触摸支持
+        let touchX = null;
+        canvas.addEventListener('touchstart', e => {
+            e.preventDefault();
+            if (!gameRunning && !gameOver) { startGame(); return; }
+            if (gameOver) { restart(); return; }
+            touchX = e.touches[0].clientX;
+        });
+        canvas.addEventListener('touchmove', e => {
+            e.preventDefault();
+            if (!gameRunning || touchX === null) return;
+            const dx = e.touches[0].clientX - touchX;
+            player.x += dx * 0.8;
+            player.x = Math.max(0, Math.min(W - player.w, player.x));
+            touchX = e.touches[0].clientX;
+        });
+        canvas.addEventListener('touchend', () => { touchX = null; });
+
+        function spawnObstacle() {
+            const w = 20 + Math.random() * 30;
+            const x = Math.random() * (W - w);
+            obstacles.push({ x, y: -30, w, h: 20 + Math.random() * 15 });
+        }
+
+        function startGame() {
+            obstacles = [];
+            score = 0;
+            gameRunning = true;
+            gameOver = false;
+            frame = 0;
+            spawnRate = 45;
+            fallSpeed = 3;
+            player.x = W / 2 - 20;
+            scoreEl.textContent = '0';
+            overlay.style.display = 'none';
+            requestAnimationFrame(loop);
+        }
+
+        function restart() { startGame(); }
+
+        function checkCollision(a, b) {
+            return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+        }
+
+        function update() {
+            if (!gameRunning || gameOver) return;
+            frame++;
+
+            // 玩家移动
+            if (keys['ArrowLeft'] || keys['a'] || keys['A']) player.x -= player.speed;
+            if (keys['ArrowRight'] || keys['d'] || keys['D']) player.x += player.speed;
+            player.x = Math.max(0, Math.min(W - player.w, player.x));
+
+            // 生成障碍物
+            if (frame % spawnRate === 0) spawnObstacle();
+
+            // 移动障碍物 & 碰撞检测
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                const obs = obstacles[i];
+                obs.y += fallSpeed;
+
+                if (checkCollision(player, obs)) {
+                    gameRunning = false;
+                    gameOver = true;
+                    finalScoreEl.textContent = score;
+                    overlay.style.display = 'block';
+                    return;
+                }
+
+                // 移除屏幕外的障碍物
+                if (obs.y > H) {
+                    obstacles.splice(i, 1);
+                    score++;
+                    scoreEl.textContent = score;
+                }
+            }
+
+            // 难度递增
+            if (score > 0 && score % 10 === 0 && frame % 60 === 0) {
+                spawnRate = Math.max(18, spawnRate - 2);
+                fallSpeed = Math.min(6, fallSpeed + 0.15);
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+
+            // 网格背景
+            ctx.strokeStyle = 'rgba(15, 52, 96, 0.3)';
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i < W; i += 30) {
+                ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, H); ctx.stroke();
+            }
+            for (let i = 0; i < H; i += 30) {
+                ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(W, i); ctx.stroke();
+            }
+
+            // 玩家
+            ctx.fillStyle = '#e94560';
+            ctx.shadowColor = '#e94560';
+            ctx.shadowBlur = 15;
+            ctx.fillRect(player.x, player.y, player.w, player.h);
+            ctx.shadowBlur = 0;
+
+            // 障碍物
+            for (const obs of obstacles) {
+                const gradient = ctx.createLinearGradient(obs.x, obs.y, obs.x, obs.y + obs.h);
+                gradient.addColorStop(0, '#533483');
+                gradient.addColorStop(1, '#0f3460');
+                ctx.fillStyle = gradient;
+                ctx.shadowColor = '#533483';
+                ctx.shadowBlur = 8;
+                ctx.fillRect(obs.x, obs.y, obs.w, obs.h);
+                ctx.shadowBlur = 0;
+
+                // 边框
+                ctx.strokeStyle = '#e94560';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(obs.x, obs.y, obs.w, obs.h);
+            }
+        }
+
+        function loop() {
+            update();
+            draw();
+            if (gameRunning) requestAnimationFrame(loop);
+        }
+
+        // 初始状态：画一个静止画面
+        draw();
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.font = '18px "Microsoft YaHei"';
+        ctx.textAlign = 'center';
+        ctx.fillText('按空格键开始游戏', W / 2, H / 2);
+    </script>
+</body>
+</html>

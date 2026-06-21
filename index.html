@@ -3,90 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>李炜的个人网站</title>
+    <meta name="description" content="李炜的个人网站 — 摄影、探索与创作。记录我的学习、思考与作品。">
+    <title>李炜 | 个人网站</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="container">
-            <a href="#" class="logo">MySite</a>
+            <a href="#" class="logo">李炜</a>
             <ul class="nav-links">
-                <li><a href="#home" class="active">首页</a></li>
-                <li><a href="#about">关于我</a></li>
+                <li><a href="#about" class="active">关于</a></li>
                 <li><a href="#skills">技能</a></li>
-                <li><a href="#projects">项目</a></li>
+                <li><a href="#works">作品</a></li>
                 <li><a href="#contact">联系</a></li>
             </ul>
             <button class="menu-toggle" aria-label="菜单">☰</button>
         </div>
     </nav>
 
-    <!-- 首页英雄区 -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <p class="greeting">你好，我是</p>
-                <h1>李炜</h1>
-                <p class="subtitle">敢于挑战一切</p>
-                <p class="description">欢迎来到我的个人网站，这里记录了我的学习、思考和作品。</p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">查看作品</a>
-                    <a href="#contact" class="btn btn-outline">联系我</a>
-                </div>
-            </div>
+    <!-- Hero 首屏 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>李炜</h1>
+            <p class="tagline">敢于挑战一切</p>
+            <div class="divider"></div>
+            <p class="description">欢迎来到我的个人网站，这里记录了我的学习、思考与作品。</p>
         </div>
     </section>
 
     <!-- 关于我 -->
-    <section id="about" class="section">
+    <section id="about" class="section about-section">
         <div class="container">
-            <h2 class="section-title">关于我</h2>
-            <div class="about-grid">
-                <div class="about-text">
-                    <p>我就读于<a href="https://www.jsu.edu.cn" target="_blank">吉首大学</a>，爱好是探索新事物、尝试新产品，以及微距摄影。</p>
-                    <p>"敢于挑战一切"是我的座右铭。</p>
+            <p class="section-label">关于我</p>
+            <h2 class="section-title">了解我多一点</h2>
+            <div class="about-text">
+                <p>就读于<a href="https://www.jsu.edu.cn" target="_blank" rel="noopener">吉首大学</a>，爱好探索新事物、尝试新产品，以及微距摄影。</p>
+                <p class="quote">「敢于挑战一切」是我的座右铭</p>
+            </div>
+            <div class="about-stats">
+                <div class="stat">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">好奇心</span>
                 </div>
-                <div class="about-stats">
-                    <div class="stat">
-                        <span class="stat-number">∞</span>
-                        <span class="stat-label">好奇心</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">5</span>
-                        <span class="stat-label">个项目</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">3</span>
-                        <span class="stat-label">大爱好</span>
-                    </div>
+                <div class="stat">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">个项目</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">大爱好</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 技能 -->
-    <section id="skills" class="section section-dark">
+    <section id="skills" class="section" style="background: var(--bg);">
         <div class="container">
-            <h2 class="section-title">技能</h2>
+            <p class="section-label">我的技能</p>
+            <h2 class="section-title">擅长领域</h2>
             <div class="skills-grid">
-                <div class="skill-card" onclick="location.href='#projects'" style="cursor:pointer">
-                    <div class="skill-icon">📷</div>
+                <div class="skill-card">
+                    <span class="skill-icon">📷</span>
                     <h3>微距摄影</h3>
                     <p>捕捉微观世界的细节之美</p>
                 </div>
-                <div class="skill-card" onclick="location.href='#projects'" style="cursor:pointer">
-                    <div class="skill-icon">🔍</div>
+                <div class="skill-card">
+                    <span class="skill-icon">🔍</span>
                     <h3>探索新事物</h3>
                     <p>保持好奇心，不断尝试</p>
                 </div>
-                <div class="skill-card" onclick="location.href='#projects'" style="cursor:pointer">
-                    <div class="skill-icon">💡</div>
+                <div class="skill-card">
+                    <span class="skill-icon">💡</span>
                     <h3>产品体验</h3>
                     <p>深度体验各类新产品</p>
                 </div>
-                <div class="skill-card" onclick="location.href='#projects'" style="cursor:pointer">
-                    <div class="skill-icon">🚀</div>
+                <div class="skill-card">
+                    <span class="skill-icon">🚀</span>
                     <h3>挑战自我</h3>
                     <p>敢于突破舒适区</p>
                 </div>
@@ -94,76 +91,59 @@
         </div>
     </section>
 
-    <!-- 项目 -->
-    <section id="projects" class="section">
+    <!-- 作品集 -->
+    <section id="works" class="section" style="background: var(--white);">
         <div class="container">
-            <h2 class="section-title">作品集</h2>
+            <p class="section-label">作品集</p>
+            <h2 class="section-title">我的作品</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <img src="images/DSC_1093.JPG" alt="巨云压山">
+                    <img src="images/DSC_0913.JPG" alt="巨云压山" loading="lazy">
                     <div class="project-info">
                         <h3>巨云压山</h3>
-                        <p>厚重的积雨云低垂于山峦之上，逆光勾勒出壮阔轮廓。</p>
-                        <div class="project-tags">
-                            <span>积雨云</span><span>山峦</span><span>逆光</span>
-                        </div>
+                        <p>厚重的积雨云低垂于山峦之上，逆光勾勒出壮阔轮廓</p>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="images/DSC_0947.JPG" alt="古秦淮匾额">
+                    <img src="images/DSC_0947.JPG" alt="古秦淮匾额" loading="lazy">
                     <div class="project-info">
                         <h3>古秦淮匾额</h3>
-                        <p>南京古秦淮的古建匾额，书法韵味悠长。</p>
-                        <div class="project-tags">
-                            <span>古建</span><span>匾额</span><span>书法</span>
-                        </div>
+                        <p>南京古秦淮的古建匾额，书法韵味悠长</p>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="images/DSC_0913.JPG" alt="航拍农田">
+                    <img src="images/DSC_1093.JPG" alt="航拍农田" loading="lazy">
                     <div class="project-info">
                         <h3>航拍农田</h3>
-                        <p>高空俯瞰下的农田与道路交织成几何画卷。</p>
-                        <div class="project-tags">
-                            <span>农田</span><span>航拍</span><span>道路</span>
-                        </div>
+                        <p>高空俯瞰下的农田与道路交织成几何画卷</p>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="images/party1.jpg" alt="萌宠聚首">
+                    <img src="images/party1.jpg" alt="萌宠聚首" loading="lazy">
                     <div class="project-info">
                         <h3>萌宠聚首</h3>
-                        <p>一群可爱的卡通动物欢乐相聚。</p>
-                        <div class="project-tags">
-                            <span>卡通</span><span>动物</span><span>聚会</span>
-                        </div>
+                        <p>一群可爱的卡通动物欢乐相聚</p>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="images/party2.jpg" alt="萌宠贺岁">
+                    <img src="images/party2.jpg" alt="萌宠贺岁" loading="lazy">
                     <div class="project-info">
                         <h3>萌宠贺岁</h3>
-                        <p>萌宠们喜气洋洋，恭贺新年发财。</p>
-                        <div class="project-tags">
-                            <span>卡通</span><span>动物</span><span>发财</span>
-                        </div>
+                        <p>萌宠们喜气洋洋，恭贺新年发财</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 联系 -->
-    <section id="contact" class="section section-dark">
+    <!-- 联系 CTA -->
+    <section id="contact" class="section contact-section">
         <div class="container">
-            <h2 class="section-title">联系我</h2>
-            <div class="contact-content">
-                <p>您可以在这个网站了解我。</p>
-                <div class="contact-links">
-                    <a href="mailto:3055413211@qq.com" class="contact-item">📧 3055413211@qq.com</a>
-                    <a href="https://github.com" target="_blank" class="contact-item">💻 GitHub</a>
-                    <a href="#" class="contact-item" onclick="navigator.clipboard.writeText('Viler1125');alert('微信号已复制：Viler1125');return false;">💬 微信：Viler1125</a>
-                </div>
+            <h2 class="contact-cta-title">有合作想法？来聊聊</h2>
+            <p class="contact-cta-sub">无论是摄影交流还是产品探讨，欢迎随时联系</p>
+            <div class="contact-links">
+                <a href="mailto:your-email@example.com" class="contact-item">✉ 发送邮件</a>
+                <a href="https://github.com/Viler9" target="_blank" rel="noopener" class="contact-item">GitHub</a>
             </div>
         </div>
     </section>
@@ -171,7 +151,8 @@
     <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 李炜的个人网站. 保留所有权利。</p>
+            <p>&copy; 2026 李炜. All rights reserved.</p>
+            <p class="tagline">敢于挑战一切</p>
         </div>
     </footer>
 

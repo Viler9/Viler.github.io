@@ -30,7 +30,10 @@ window.addEventListener('scroll', () => {
 
     navItems.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
+        const href = link.getAttribute('href');
+        if (current && href === '#' + current) {
+            link.classList.add('active');
+        } else if (!current && href === '#about') {
             link.classList.add('active');
         }
     });
